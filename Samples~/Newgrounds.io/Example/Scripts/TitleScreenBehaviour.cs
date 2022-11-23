@@ -47,8 +47,8 @@ public class TitleScreenBehaviour : MonoBehaviour
             {3, SaveSlot3Object}
         };
 
-        foreach(var (id, slot) in SaveSlots) {
-            slot.GetData += OnSaveSlotLoaded;
+        foreach(var item in SaveSlots) {
+            item.Value.GetData += OnSaveSlotLoaded;
         }
 
         // hide all of our UI elements while NGIO stuff is loading

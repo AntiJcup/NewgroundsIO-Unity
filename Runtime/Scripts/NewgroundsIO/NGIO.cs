@@ -187,15 +187,15 @@ public static class NGIO {
 			ngioCore.ServerResponse += OnServerResponse;
 
 			if (!(options == null)) {
-				foreach(var (prop, val) in options)
+				foreach(var item in options)
 				{
-					if (prop == "version")			_version = (string)val;
-					if (prop == "debugMode")		_debugMode = (bool)val;
-					if (prop == "checkHostLicense")		_checkHostLicense = (bool)val;
-					if (prop == "autoLogNewView")		_autoLogNewView = (bool)val;
-					if (prop == "preloadMedals")		_preloadMedals = (bool)val;
-					if (prop == "preloadScoreBoards")	_preloadScoreBoards = (bool)val;
-					if (prop == "preloadSaveSlots")		_preloadSaveSlots = (bool)val;
+					if (item.Key == "version")			_version = (string)item.Value;
+					if (item.Key == "debugMode")		_debugMode = (bool)item.Value;
+					if (item.Key == "checkHostLicense")		_checkHostLicense = (bool)item.Value;
+					if (item.Key == "autoLogNewView")		_autoLogNewView = (bool)item.Value;
+					if (item.Key == "preloadMedals")		_preloadMedals = (bool)item.Value;
+					if (item.Key == "preloadScoreBoards")	_preloadScoreBoards = (bool)item.Value;
+					if (item.Key == "preloadSaveSlots")		_preloadSaveSlots = (bool)item.Value;
 				}
 			}
 
@@ -336,8 +336,8 @@ public static class NGIO {
 	{
 		short total = 0;
 
-		foreach(var (id, slot) in saveSlots) {
-			if (slot.hasData) total++; 
+		foreach(var item in saveSlots) {
+			if (item.Value.hasData) total++; 
 		}
 
 		return total;

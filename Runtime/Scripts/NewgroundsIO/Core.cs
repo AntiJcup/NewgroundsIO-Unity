@@ -371,10 +371,10 @@ namespace NewgroundsIO {
 					if (!string.IsNullOrEmpty(query)) {
 
 						if (query.Substring(0,1) == "?") query = query.Remove(0,1);
-						var pairs = query.Split("&");
+						var pairs = query.Split('&');
 						foreach(var pair in pairs)
 						{
-							var key_val = pair.Split("=");
+							var key_val = pair.Split('=');
 							this.uriParams.Add(key_val[0], key_val[1] ?? null);
 						}
 					}

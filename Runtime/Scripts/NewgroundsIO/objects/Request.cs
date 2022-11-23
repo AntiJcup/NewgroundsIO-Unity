@@ -65,7 +65,7 @@ namespace NewgroundsIO.objects {
 		{
 			// This could be a single execute, or a whole queue. Decide which to encode.
 			if (propName == "execute") {
-				return "\"execute\":" + this._getValueJSON((this.isList ? this.executeList : this.execute));
+				return "\"execute\":" + this._getValueJSON((this.isList ? this.executeList as object : this.execute as object));
 			}
 
 			return base._getPropertyJSON(propName);
