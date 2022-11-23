@@ -51,7 +51,7 @@ namespace NewgroundsIO.objects {
 		/// <param name="cloneTo">An object to clone properties to. If null, a new instance will be created.</param>
 		/// <returns>The object that was cloned to.</returns>
 		public NewgroundsIO.objects.Request clone(NewgroundsIO.objects.Request cloneTo = null) {
-			if (cloneTo is null) cloneTo = new NewgroundsIO.objects.Request();
+			if (cloneTo == null) cloneTo = new NewgroundsIO.objects.Request();
 			cloneTo.__properties.ForEach(propName => {
 				cloneTo.GetType().GetProperty(propName).SetValue(cloneTo, this.GetType().GetProperty(propName).GetValue(this), null);
 			});
@@ -86,7 +86,7 @@ namespace NewgroundsIO.objects {
 			__requireSession = require;
 
 			// if we don't have a Core or session, this is a bad request
-			if (require && ((__ngioCore is null) || (this.session_id is null))) {
+			if (require && ((__ngioCore == null) || (this.session_id == null))) {
 				UnityEngine.Debug.LogError("NewgroundsIO Error: One or more components requires an active user session!");
 			}
 
@@ -98,7 +98,7 @@ namespace NewgroundsIO.objects {
 		{ 
 			base.SetCore(ngio);
 			this.app_id = ngio.appID;
-			if (!(ngio.session?.id is null)) this.session_id = ngio.session.id;
+			if (!(ngio.session?.id == null)) this.session_id = ngio.session.id;
 		}
 
 	}

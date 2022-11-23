@@ -68,22 +68,22 @@ public static class NGIO {
 	public static bool isInitialized { get; private set; }
 
 	/// <summary>Returns true if we currently have a valid session ID.</summary>
-	public static bool hasSession { get { return session is not null && !session.expired; }}
+	public static bool hasSession { get { return session != null && !session.expired; }}
 
 	/// <summary>Returns true if we currently have a valid session ID.</summary>
-	public static bool hasUser { get { return user is not null; }}
+	public static bool hasUser { get { return user != null; }}
 
 	/// <summary>Will be true if we've finished logging in and preloading data.</summary>
 	public static bool isReady { get { return lastConnectionStatus == STATUS_READY; }}
 
 	/// <summary>Contains all information about the current user session.</summary>
-	public static NewgroundsIO.objects.Session session { get { return ngioCore is null ? null : ngioCore.session; }}
+	public static NewgroundsIO.objects.Session session { get { return ngioCore == null ? null : ngioCore.session; }}
 
 	/// <summary>Will be null unless there was an error in our session.</summary>
 	public static NewgroundsIO.objects.Error sessionError { get; private set; } = null;
 
 	/// <summary>Contains user information if the user is logged in. Otherwise null.</summary>
-	public static NewgroundsIO.objects.User user { get { return session is null ? null : session.user; }}
+	public static NewgroundsIO.objects.User user { get { return session == null ? null : session.user; }}
 
 	/// <summary>Will be set to false if the local copy of the game is being hosted illegally.</summary>
 	public static bool legalHost { get; private set; } = true;
@@ -186,7 +186,7 @@ public static class NGIO {
 			ngioCore = new NewgroundsIO.Core(appID, aesKey);
 			ngioCore.ServerResponse += OnServerResponse;
 
-			if (!(options is null)) {
+			if (!(options == null)) {
 				foreach(var (prop, val) in options)
 				{
 					if (prop == "version")			_version = (string)val;
@@ -292,7 +292,7 @@ public static class NGIO {
 	/// <param name="medalID">The ID of the medal</param>
 	public static NewgroundsIO.objects.Medal GetMedal(int medalID)
 	{
-		if (medals is null) {
+		if (medals == null) {
 			UnityEngine.Debug.LogError("NGIO Error: Can't use GetMedal without setting preloadMedals option to true");
 			return null;
 		}
@@ -307,7 +307,7 @@ public static class NGIO {
 	/// <param name="boardID">The ID of the score board</param>
 	public static NewgroundsIO.objects.ScoreBoard GetScoreBoard(int boardID)
 	{
-		if (scoreBoards is null) {
+		if (scoreBoards == null) {
 			UnityEngine.Debug.LogError("NGIO Error: Can't use GetScoreBoard without setting preloadScoreBoards option to true");
 			return null;
 		}
@@ -322,7 +322,7 @@ public static class NGIO {
 	/// <param name="slotID">The desired slot number</param>
 	public static NewgroundsIO.objects.SaveSlot GetSaveSlot(int slotID)
 	{
-		if (saveSlots is null) {
+		if (saveSlots == null) {
 			UnityEngine.Debug.LogError("NGIO Error: Can't use GetSaveSlot without setting preloadSaveSlots option to true");
 			return null;
 		}
@@ -361,7 +361,7 @@ public static class NGIO {
 	public static IEnumerator GetConnectionStatus(Action<string> handler)
 	{
 
-		if (_checkingConnectionStatus || (lastConnectionStatus is null) || (session is null)) yield break;
+		if (_checkingConnectionStatus || (lastConnectionStatus == null) || (session == null)) yield break;
 
 		_checkingConnectionStatus = true;
 
@@ -445,7 +445,7 @@ public static class NGIO {
 	/// <param name="callback">A function to run when the file has been loaded</param>
 	public static IEnumerator GetSaveSlotData(int slotID, Action<string> callback)
 	{
-		if (saveSlots is null) {
+		if (saveSlots == null) {
 			UnityEngine.Debug.LogError("GetSaveSlotData data called without any preloaded save slots.");
 			callback(null);
 		}
@@ -464,21 +464,21 @@ public static class NGIO {
 	/// <param name="callback">A function to run when the file finished saving.</param>
 	public static IEnumerator SetSaveSlotData(int slotID, string data, Action<NewgroundsIO.objects.SaveSlot> callback=null)
 	{
-		if (saveSlots is null) {
+		if (saveSlots == null) {
 			UnityEngine.Debug.LogError("SetSaveSlotData data called without any preloaded save slots.");
-			if (callback is not null) callback(null);
+			if (callback != null) callback(null);
 			yield break;
 		}
 		
 		var slot = GetSaveSlot(slotID);
-		if (slot is null) {
+		if (slot == null) {
 			UnityEngine.Debug.LogError("Slot #"+slotID+" does not exist.");
-			if (callback is not null) callback(null);
+			if (callback != null) callback(null);
 			yield break;
 		}
 		yield return slot.SetData(data);
 		
-		if (callback is not null) callback(lastSaveSlotSaved);
+		if (callback != null) callback(lastSaveSlotSaved);
 	}
 
 	/** =========================== Public Event Coroutines ========================== **/
@@ -494,7 +494,7 @@ public static class NGIO {
 		component.event_name = eventName;
 		yield return ngioCore.ExecuteComponent(component);
 		
-		if (callback is not null) callback(lastLoggedEvent);
+		if (callback != null) callback(lastLoggedEvent);
 	}
 
 	/** ========================== Public Gateway Coroutines ========================= **/
@@ -509,7 +509,7 @@ public static class NGIO {
 
 		yield return ngioCore.ExecuteComponent(component);
 
-		if (callback is not null) callback(lastDateTime,lastTimeStamp);
+		if (callback != null) callback(lastDateTime,lastTimeStamp);
 	}
 
 	/** =========================== Public Medal Coroutines ========================== **/
@@ -521,21 +521,21 @@ public static class NGIO {
 	/// <param name="callback">A function to run when the medal has unlocked.</param>
 	public static IEnumerator UnlockMedal(int medalID, Action<NewgroundsIO.objects.Medal> callback=null)
 	{
-		if (medals is null) {
+		if (medals == null) {
 			UnityEngine.Debug.LogError("UnlockMedal called without any preloaded medals.");
-			if (callback is not null) callback(null);
+			if (callback != null) callback(null);
 			yield break;
 		}
 		var medal = GetMedal(medalID);
-		if (medal is null) {
+		if (medal == null) {
 			UnityEngine.Debug.LogError("Medal #"+medalID+" does not exist.");
-			if (callback is not null) callback(null);
+			if (callback != null) callback(null);
 			yield break;
 		}
 
 		yield return medal.Unlock();
 		
-		if (callback is not null) callback(lastMedalUnlocked);
+		if (callback != null) callback(lastMedalUnlocked);
 	}
 
 	/** ======================== Public Scoreboard Coroutines ======================== **/
@@ -549,21 +549,21 @@ public static class NGIO {
 	/// <param name="callback">A function to run when the score has posted.</param>
 	public static IEnumerator PostScore(int boardID, int value, string tag=null, Action<NewgroundsIO.objects.ScoreBoard,NewgroundsIO.objects.Score> callback=null)
 	{
-		if (scoreBoards is null) {
+		if (scoreBoards == null) {
 			UnityEngine.Debug.LogError("PostScore called without any preloaded scoreboards.");
-			if (callback is not null) callback(null, null);
+			if (callback != null) callback(null, null);
 			yield break;
 		}
 		var board = GetScoreBoard(boardID);
-		if (board is null) {
+		if (board == null) {
 			UnityEngine.Debug.LogError("ScoreBoard #"+boardID+" does not exist.");
-			if (callback is not null) callback(null, null);
+			if (callback != null) callback(null, null);
 			yield break;
 		}
 
 		yield return board.PostScore(value, tag);
 		
-		if (callback is not null) callback(lastBoardPosted, lastScorePosted);
+		if (callback != null) callback(lastBoardPosted, lastScorePosted);
 	}
 
 	/// <summary>
@@ -576,21 +576,21 @@ public static class NGIO {
 	/// <param name="callback">A function to run when the scores have been loaded.</param>
 	public static IEnumerator GetScores(int boardID, string period="D", string tag=null, bool social=false, Action<NewgroundsIO.objects.ScoreBoard, List<NewgroundsIO.objects.Score>, string, string, bool> callback=null)
 	{
-		if (scoreBoards is null) {
+		if (scoreBoards == null) {
 			UnityEngine.Debug.LogError("GetScores called without any preloaded scoreboards.");
-			if (callback is not null) callback(null, null, period, tag, social);
+			if (callback != null) callback(null, null, period, tag, social);
 			yield break;
 		}
 		var board = GetScoreBoard(boardID);
-		if (board is null) {
+		if (board == null) {
 			UnityEngine.Debug.LogError("ScoreBoard #"+boardID+" does not exist.");
-			if (callback is not null) callback(null, null, period, tag, social);
+			if (callback != null) callback(null, null, period, tag, social);
 			yield break;
 		}
 		
 		yield return board.GetScores(period, tag, social);
 
-		if (callback is not null) callback(board, lastGetScoresResult.scores, period, tag, social);
+		if (callback != null) callback(board, lastGetScoresResult.scores, period, tag, social);
 	}
 
 	/** ===================== Private Login/Preloader Enumerators ==================== **/
@@ -633,7 +633,7 @@ public static class NGIO {
 		if (_preloadScoreBoards) {
 			ngioCore.QueueComponent(new NewgroundsIO.components.ScoreBoard.getBoards());
 		}
-		if (!(user is null) && _preloadSaveSlots) ngioCore.QueueComponent(new NewgroundsIO.components.CloudSave.loadSlots());
+		if (!(user == null) && _preloadSaveSlots) ngioCore.QueueComponent(new NewgroundsIO.components.CloudSave.loadSlots());
 
 		if (ngioCore.hasQueue) yield return ngioCore.ExecuteQueue();
 
@@ -655,17 +655,17 @@ public static class NGIO {
 	// Runs anytime the core gets a server response. Grabs individual result objects and runs them through HandleNewComponentResult().
 	private static void OnServerResponse(NewgroundsIO.objects.Response response)
 	{
-		if (!(response is null) && response.success) {
+		if (!(response == null) && response.success) {
 
 			// make a note of our last update time
 			lastExecution = DateTime.Now;
 
 			if (response.isList) {
 				response.resultList.ForEach(result => {
-					if (!(result is null)) HandleNewComponentResult(result);
+					if (!(result == null)) HandleNewComponentResult(result);
 				});
 			} else {
-				if (!(response.result is null)) HandleNewComponentResult(response.result);
+				if (!(response.result == null)) HandleNewComponentResult(response.result);
 			}
 		}
 	}
@@ -738,7 +738,7 @@ public static class NGIO {
 				if (!result.success) return;
 
 				// Save, or replace, the slot in our dictionary so it can be retrieved by it's slot number
-				if (!(saveSlots is null)) {
+				if (!(saveSlots == null)) {
 					var slot = CloudSaveLoadSlotResult.slot;
 					saveSlots[slot.id] = slot.clone(saveSlots.ContainsKey(slot.id) ? saveSlots[slot.id] : null);
 				}
@@ -754,7 +754,7 @@ public static class NGIO {
 				}
 
 				// Save, or replace, the slot in our dictionary so it can be retrieved by it's slot number
-				if (!(saveSlots is null)) {
+				if (!(saveSlots == null)) {
 					var slot = CloudSaveSaveSlotResult.slot;
 					saveSlots[slot.id] = slot.clone(saveSlots.ContainsKey(slot.id) ? saveSlots[slot.id] : null);
 					lastSaveSlotSaved = saveSlots[slot.id];
@@ -768,7 +768,7 @@ public static class NGIO {
 				if (!result.success) return;
 
 				// Save, or replace, the slot in our dictionary so it can be retrieved by it's slot number
-				if (!(saveSlots is null)) {
+				if (!(saveSlots == null)) {
 					var slot = CloudSaveClearSlotResult.slot;
 					saveSlots[slot.id] = slot.clone(saveSlots.ContainsKey(slot.id) ? saveSlots[slot.id] : null);
 				}
@@ -849,7 +849,7 @@ public static class NGIO {
 				}
 
 				// Save, or replace, the medal in our dictionary so it can be retrieved by it's ID
-				if (!(medals is null)) {
+				if (!(medals == null)) {
 					medals[MedalUnlockResult.medal.id] = MedalUnlockResult.medal.clone();
 					lastMedalUnlocked = medals[MedalUnlockResult.medal.id];
 				}

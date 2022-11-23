@@ -15,7 +15,7 @@ public class SaveMenu : MonoBehaviour
     // Start is called before the first frame update
     void Init()
     {
-        if (slots is null) {
+        if (slots == null) {
             slots = new List<SaveSlot>() {
                 Slot1Object,
                 Slot2Object,

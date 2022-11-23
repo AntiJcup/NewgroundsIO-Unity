@@ -22,7 +22,7 @@ namespace NewgroundsIO.results.Loader {
 		/// <param name="cloneTo">An object to clone properties to. If null, a new instance will be created.</param>
 		/// <returns>The object that was cloned to.</returns>
 		public NewgroundsIO.results.Loader.loadOfficialUrl clone(NewgroundsIO.results.Loader.loadOfficialUrl cloneTo = null) {
-			if (cloneTo is null) cloneTo = new NewgroundsIO.results.Loader.loadOfficialUrl();
+			if (cloneTo == null) cloneTo = new NewgroundsIO.results.Loader.loadOfficialUrl();
 			cloneTo.__properties.ForEach(propName => {
 				cloneTo.GetType().GetProperty(propName).SetValue(cloneTo, this.GetType().GetProperty(propName).GetValue(this), null);
 			});

@@ -35,14 +35,14 @@ namespace NewgroundsIO.results.Medal {
 		/// <summary>Links a Core instance to every object in our object lists.</summary>
 		public override void SetCoreOnLists( NewgroundsIO.Core ngio )
 		{
-			this.medals.ForEach(child => { if (!(child is null)) child.SetCore(ngio); });
+			this.medals.ForEach(child => { if (!(child == null)) child.SetCore(ngio); });
 		}
 
 		/// <summary>Clones the properties of this object to another (or new) object.</summary>
 		/// <param name="cloneTo">An object to clone properties to. If null, a new instance will be created.</param>
 		/// <returns>The object that was cloned to.</returns>
 		public NewgroundsIO.results.Medal.getList clone(NewgroundsIO.results.Medal.getList cloneTo = null) {
-			if (cloneTo is null) cloneTo = new NewgroundsIO.results.Medal.getList();
+			if (cloneTo == null) cloneTo = new NewgroundsIO.results.Medal.getList();
 			cloneTo.__properties.ForEach(propName => {
 				cloneTo.GetType().GetProperty(propName).SetValue(cloneTo, this.GetType().GetProperty(propName).GetValue(this), null);
 			});

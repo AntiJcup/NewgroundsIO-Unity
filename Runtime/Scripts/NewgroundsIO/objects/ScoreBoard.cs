@@ -28,7 +28,7 @@ namespace NewgroundsIO.objects {
 		/// <param name="cloneTo">An object to clone properties to. If null, a new instance will be created.</param>
 		/// <returns>The object that was cloned to.</returns>
 		public NewgroundsIO.objects.ScoreBoard clone(NewgroundsIO.objects.ScoreBoard cloneTo = null) {
-			if (cloneTo is null) cloneTo = new NewgroundsIO.objects.ScoreBoard();
+			if (cloneTo == null) cloneTo = new NewgroundsIO.objects.ScoreBoard();
 			cloneTo.__properties.ForEach(propName => {
 				cloneTo.GetType().GetProperty(propName).SetValue(cloneTo, this.GetType().GetProperty(propName).GetValue(this), null);
 			});
@@ -46,7 +46,7 @@ namespace NewgroundsIO.objects {
 		public IEnumerator GetScores(string period="D", string tag=null, bool social=false, int skip=0, int limit=10, Action<NewgroundsIO.objects.Response> callback=null)
 		{
 			// You can't load scores without a Core object.
-			if (this.__ngioCore is null) {
+			if (this.__ngioCore == null) {
 				UnityEngine.Debug.LogError("Can not get scores without attaching a NewgroundsIO.Core instnce");
 				yield break;
 			}
@@ -55,7 +55,7 @@ namespace NewgroundsIO.objects {
 			var component = new NewgroundsIO.components.ScoreBoard.getScores();
 			component.id = this.id;
 			component.period = period;
-			if (!(tag is null)) component.tag = tag;
+			if (!(tag == null)) component.tag = tag;
 			if (social) component.social = true;
 			if (skip > 0) component.skip = skip;
 			if (limit > 0) component.limit = limit;
@@ -69,7 +69,7 @@ namespace NewgroundsIO.objects {
 		public IEnumerator PostScore(int value, string tag=null, Action<NewgroundsIO.objects.Response> callback=null)
 		{
 			// You can't post scores without a Core object.
-			if (this.__ngioCore is null) {
+			if (this.__ngioCore == null) {
 				UnityEngine.Debug.LogError("Can not post scoreBoard object without attaching a NewgroundsIO.Core instnce");
 				yield break;
 			}
@@ -78,7 +78,7 @@ namespace NewgroundsIO.objects {
 			var component = new NewgroundsIO.components.ScoreBoard.postScore();
 			component.id = this.id;
 			component.value = value;
-			if (!(tag is null)) component.tag = tag;
+			if (!(tag == null)) component.tag = tag;
 			yield return __ngioCore.ExecuteComponent(component, callback);
 		}
 

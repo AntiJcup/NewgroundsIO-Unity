@@ -35,14 +35,14 @@ namespace NewgroundsIO.results.ScoreBoard {
 		/// <summary>Links a Core instance to every object in our object lists.</summary>
 		public override void SetCoreOnLists( NewgroundsIO.Core ngio )
 		{
-			this.scoreboards.ForEach(child => { if (!(child is null)) child.SetCore(ngio); });
+			this.scoreboards.ForEach(child => { if (!(child == null)) child.SetCore(ngio); });
 		}
 
 		/// <summary>Clones the properties of this object to another (or new) object.</summary>
 		/// <param name="cloneTo">An object to clone properties to. If null, a new instance will be created.</param>
 		/// <returns>The object that was cloned to.</returns>
 		public NewgroundsIO.results.ScoreBoard.getBoards clone(NewgroundsIO.results.ScoreBoard.getBoards cloneTo = null) {
-			if (cloneTo is null) cloneTo = new NewgroundsIO.results.ScoreBoard.getBoards();
+			if (cloneTo == null) cloneTo = new NewgroundsIO.results.ScoreBoard.getBoards();
 			cloneTo.__properties.ForEach(propName => {
 				cloneTo.GetType().GetProperty(propName).SetValue(cloneTo, this.GetType().GetProperty(propName).GetValue(this), null);
 			});

@@ -18,7 +18,7 @@ namespace NewgroundsIO.results.CloudSave {
 		}
 
 		public NewgroundsIO.results.CloudSave.saveSlot clone(NewgroundsIO.results.CloudSave.saveSlot cloneTo = null) {
-			if (cloneTo is null) cloneTo = new NewgroundsIO.results.CloudSave.saveSlot();
+			if (cloneTo == null) cloneTo = new NewgroundsIO.results.CloudSave.saveSlot();
 			cloneTo.__properties.ForEach(propName => {
 				cloneTo.GetType().GetProperty(propName).SetValue(cloneTo, this.GetType().GetProperty(propName).GetValue(this), null);
 			});

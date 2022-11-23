@@ -20,7 +20,7 @@ namespace NewgroundsIO.components.Gateway {
 		/// <param name="cloneTo">An object to clone properties to. If null, a new instance will be created.</param>
 		/// <returns>The object that was cloned to.</returns>
 		public NewgroundsIO.components.Gateway.ping clone(NewgroundsIO.components.Gateway.ping cloneTo = null) {
-			if (cloneTo is null) cloneTo = new NewgroundsIO.components.Gateway.ping();
+			if (cloneTo == null) cloneTo = new NewgroundsIO.components.Gateway.ping();
 			cloneTo.__properties.ForEach(propName => {
 				cloneTo.GetType().GetProperty(propName).SetValue(cloneTo, this.GetType().GetProperty(propName).GetValue(this), null);
 			});

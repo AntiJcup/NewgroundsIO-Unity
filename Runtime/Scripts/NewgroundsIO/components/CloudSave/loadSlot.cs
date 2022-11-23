@@ -26,7 +26,7 @@ namespace NewgroundsIO.components.CloudSave {
 		/// <param name="cloneTo">An object to clone properties to. If null, a new instance will be created.</param>
 		/// <returns>The object that was cloned to.</returns>
 		public NewgroundsIO.components.CloudSave.loadSlot clone(NewgroundsIO.components.CloudSave.loadSlot cloneTo = null) {
-			if (cloneTo is null) cloneTo = new NewgroundsIO.components.CloudSave.loadSlot();
+			if (cloneTo == null) cloneTo = new NewgroundsIO.components.CloudSave.loadSlot();
 			cloneTo.__properties.ForEach(propName => {
 				cloneTo.GetType().GetProperty(propName).SetValue(cloneTo, this.GetType().GetProperty(propName).GetValue(this), null);
 			});

@@ -78,7 +78,7 @@ namespace NewgroundsIO.objects {
 		/// <param name="cloneTo">An object to clone properties to. If null, a new instance will be created.</param>
 		/// <returns>The object that was cloned to.</returns>
 		public NewgroundsIO.objects.Session clone(NewgroundsIO.objects.Session cloneTo = null) {
-			if (cloneTo is null) cloneTo = new NewgroundsIO.objects.Session();
+			if (cloneTo == null) cloneTo = new NewgroundsIO.objects.Session();
 			cloneTo.__properties.ForEach(propName => {
 				cloneTo.GetType().GetProperty(propName).SetValue(cloneTo, this.GetType().GetProperty(propName).GetValue(this), null);
 			});
@@ -116,7 +116,7 @@ namespace NewgroundsIO.objects {
 			this.mode = "wait";
 			yield return this.EndSession();
 
-			if (!(callback is null)) callback(this);
+			if (!(callback == null)) callback(this);
 		}
 
 		/// <summary>Cancels a pending login attempt.</summary>
@@ -143,7 +143,7 @@ namespace NewgroundsIO.objects {
 			// if we have a new status, we can fire the callback
 			if (this._lastStatus != this.status) {
 				this._lastStatus = this.status;
-				if (!(callback is null)) callback(this);
+				if (!(callback == null)) callback(this);
 			}
 
 			// we can skip this whole routine if we're in the middle of checking things
@@ -301,7 +301,7 @@ namespace NewgroundsIO.objects {
 						this.status = NewgroundsIO.SessionState.SESSION_UNINITIALIZED;
 
 					// we have a valid user login attached!
-					} else if (!(result.session.user is null)) {
+					} else if (!(result.session.user == null)) {
 
 						// store the user info, and update status
 						this.user = result.session.user;

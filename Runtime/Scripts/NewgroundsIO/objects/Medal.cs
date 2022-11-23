@@ -51,7 +51,7 @@ namespace NewgroundsIO.objects {
 		/// <param name="cloneTo">An object to clone properties to. If null, a new instance will be created.</param>
 		/// <returns>The object that was cloned to.</returns>
 		public NewgroundsIO.objects.Medal clone(NewgroundsIO.objects.Medal cloneTo = null) {
-			if (cloneTo is null) cloneTo = new NewgroundsIO.objects.Medal();
+			if (cloneTo == null) cloneTo = new NewgroundsIO.objects.Medal();
 			cloneTo.__properties.ForEach(propName => {
 				cloneTo.GetType().GetProperty(propName).SetValue(cloneTo, this.GetType().GetProperty(propName).GetValue(this), null);
 			});
@@ -64,7 +64,7 @@ namespace NewgroundsIO.objects {
 		public IEnumerator Unlock(Action<NewgroundsIO.objects.Response> callback=null)
 		{
 			// You can't unlock a medal without a Core object.
-			if (this.__ngioCore is null) {
+			if (this.__ngioCore == null) {
 				UnityEngine.Debug.LogError("NewgroundsIO - Can not unlock medal object without attaching a NewgroundsIO.Core instance.");
 				yield break;
 			}

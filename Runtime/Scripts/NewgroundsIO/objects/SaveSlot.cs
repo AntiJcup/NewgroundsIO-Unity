@@ -25,7 +25,7 @@ namespace NewgroundsIO.objects {
 		public string url { get; set; }
 
 		/// <summary>This will be true if this save slot has any saved data</summary>
-		public bool hasData { get { return !(this.url is null); }}
+		public bool hasData { get { return !(this.url == null); }}
 
 
 		/// <summary>Constructor</summary>
@@ -50,7 +50,7 @@ namespace NewgroundsIO.objects {
 		/// <param name="cloneTo">An object to clone properties to. If null, a new instance will be created.</param>
 		/// <returns>The object that was cloned to.</returns>
 		public NewgroundsIO.objects.SaveSlot clone(NewgroundsIO.objects.SaveSlot cloneTo = null) {
-			if (cloneTo is null) cloneTo = new NewgroundsIO.objects.SaveSlot();
+			if (cloneTo == null) cloneTo = new NewgroundsIO.objects.SaveSlot();
 			cloneTo.__properties.ForEach(propName => {
 				cloneTo.GetType().GetProperty(propName).SetValue(cloneTo, this.GetType().GetProperty(propName).GetValue(this), null);
 			});
@@ -62,7 +62,7 @@ namespace NewgroundsIO.objects {
 		/// <param name="callback">The callback function</param>
 		public IEnumerator GetData(Action<string> callback)
 		{
-			if (this.url is null) {
+			if (this.url == null) {
 				callback(null);
 				yield break;
 			}
@@ -83,8 +83,8 @@ namespace NewgroundsIO.objects {
 		/// <param name="callback">The callback function</param>
 		public IEnumerator SetData(string data, Action<NewgroundsIO.objects.Response> callback=null)
 		{
-			if (__ngioCore is null) {
-				if (!(callback is null)) callback(null);
+			if (__ngioCore == null) {
+				if (!(callback == null)) callback(null);
 				yield break;
 			}
 

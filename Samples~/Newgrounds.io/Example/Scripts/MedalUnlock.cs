@@ -35,7 +35,7 @@ public class MedalUnlock : MonoBehaviour
     void UpdateMedal(NewgroundsIO.objects.Medal medal)
     {
         // medal isn't loaded or doesn't exist
-        if (medal is null) {
+        if (medal == null) {
             UnlockButton.gameObject.SetActive(true);
             UnlockedText.gameObject.SetActive(false);
 
@@ -60,7 +60,7 @@ public class MedalUnlock : MonoBehaviour
     // update the UI after medal is unlocked
     void OnMedalUnlocked(NewgroundsIO.objects.Medal medal)
     {
-        if (medal is not null) {
+        if (medal != null) {
             UpdateMedal(medal);
         }
     }

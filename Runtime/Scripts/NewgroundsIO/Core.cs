@@ -303,7 +303,7 @@ namespace NewgroundsIO {
 			if (post.result == UnityWebRequest.Result.ConnectionError)
 			{
 				Debug.LogError("Error While Sending: " + post.error);
-				if (!(callback is null)) callback(null);
+				if (!(callback == null)) callback(null);
 			}
 
 			else
@@ -325,14 +325,14 @@ namespace NewgroundsIO {
 					OnServerResponse(responseObject);
 
 					// fire the callback function
-					if (!(callback is null)) callback(responseObject);
+					if (!(callback == null)) callback(responseObject);
 				}
 
 				// handle any errors in decoding the JSON response
 				catch(JsonException e)
 				{
 					Debug.LogError(e);
-					if (!(callback is null)) callback(null);
+					if (!(callback == null)) callback(null);
 				}
 			}
 
@@ -346,7 +346,7 @@ namespace NewgroundsIO {
 		// Parses the query string from the URI hostin this game.		
 		private void ParseURL()
 		{
-			if (!(this._host is null)) return;
+			if (!(this._host == null)) return;
 
 			string web_url = Application.absoluteURL;
 			
@@ -384,7 +384,7 @@ namespace NewgroundsIO {
 
 			this.session.SetCore(this);
 			
-			if (!(this.GetUriParam("ngio_session_id") is null)) {
+			if (!(this.GetUriParam("ngio_session_id") == null)) {
 				this.session._uri_id = this.GetUriParam("ngio_session_id");
 			}
 		}
@@ -392,7 +392,7 @@ namespace NewgroundsIO {
 		// apply the host domain, or other indicator to any components that need it
 		private void ApplyHost(NewgroundsIO.BaseComponent component)
 		{
-			if (!(this.host is null) && component.__properties.Contains("host")) {
+			if (!(this.host == null) && component.__properties.Contains("host")) {
 				component.host = this.host;
 			}
 		}
@@ -460,7 +460,7 @@ namespace NewgroundsIO {
 				
 				if ((val is BaseObject)) {
 					BaseObject _obj = val as BaseObject;
-					if (_obj.__ngioCore is null) _obj.SetCore(ngio);
+					if (_obj.__ngioCore == null) _obj.SetCore(ngio);
 				}
 			});
 
@@ -478,7 +478,7 @@ namespace NewgroundsIO {
 			bool valid = true;
 
 			this.__required.ForEach(req => {
-				if (GetPropValue(this, req) is null) {
+				if (GetPropValue(this, req) == null) {
 					Debug.LogError("NewgroundsIO Error - Missing required property: "+req+" in "+this);
 				}
 			});
@@ -532,7 +532,7 @@ namespace NewgroundsIO {
 					var prop = this.GetType().GetProperty(propName);
 
 					// skip missing or null properties
-					if (prop is null || jsonObj.GetValue(propName) is null) {
+					if (prop == null || jsonObj.GetValue(propName) == null) {
 						return;
 					}
 
@@ -548,7 +548,7 @@ namespace NewgroundsIO {
 						}
 
 						// If there's no custom property handler, use base values or object mapping
-						if ((cObj is null) || !this.SetPropertyCustom(propName, cObj)) {
+						if ((cObj == null) || !this.SetPropertyCustom(propName, cObj)) {
 
 							switch (jsonObj.GetValue(propName).Type.ToString()) {
 
@@ -676,7 +676,7 @@ namespace NewgroundsIO {
 		public virtual bool _skipJsonProp(string propName)
 		{
 			bool required = this.__required.Contains(propName);
-			if (!required && GetPropValue(this, propName) is null) return true;
+			if (!required && GetPropValue(this, propName) == null) return true;
 
 			return false;
 		}
@@ -693,7 +693,7 @@ namespace NewgroundsIO {
 		public string _getValueJSON(object val)
 		{
 			// simple null string
-			if (val is null) return "null";
+			if (val == null) return "null";
 
 			// object models 
 			if (val is NewgroundsIO.BaseObject) {
@@ -824,7 +824,7 @@ namespace NewgroundsIO {
 			if (propName == "component") {
 
 				// null components are bad
-				if (this.component is null) {
+				if (this.component == null) {
 					Debug.LogError("NewgroundsIO Error: Missing component object!");
 					return "\"component\":null";
 				}

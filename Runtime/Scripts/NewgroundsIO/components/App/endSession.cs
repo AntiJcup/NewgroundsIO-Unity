@@ -21,7 +21,7 @@ namespace NewgroundsIO.components.App {
 		/// <param name="cloneTo">An object to clone properties to. If null, a new instance will be created.</param>
 		/// <returns>The object that was cloned to.</returns>
 		public NewgroundsIO.components.App.endSession clone(NewgroundsIO.components.App.endSession cloneTo = null) {
-			if (cloneTo is null) cloneTo = new NewgroundsIO.components.App.endSession();
+			if (cloneTo == null) cloneTo = new NewgroundsIO.components.App.endSession();
 			cloneTo.__properties.ForEach(propName => {
 				cloneTo.GetType().GetProperty(propName).SetValue(cloneTo, this.GetType().GetProperty(propName).GetValue(this), null);
 			});

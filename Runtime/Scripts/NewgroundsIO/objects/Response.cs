@@ -63,7 +63,7 @@ namespace NewgroundsIO.objects {
 		/// <param name="cloneTo">An object to clone properties to. If null, a new instance will be created.</param>
 		/// <returns>The object that was cloned to.</returns>
 		public NewgroundsIO.objects.Response clone(NewgroundsIO.objects.Response cloneTo = null) {
-			if (cloneTo is null) cloneTo = new NewgroundsIO.objects.Response();
+			if (cloneTo == null) cloneTo = new NewgroundsIO.objects.Response();
 			cloneTo.__properties.ForEach(propName => {
 				cloneTo.GetType().GetProperty(propName).SetValue(cloneTo, this.GetType().GetProperty(propName).GetValue(this), null);
 			});
@@ -109,7 +109,7 @@ namespace NewgroundsIO.objects {
 		/// <summary>This override will link a Core instance to every result in the resultList.</summary>
 		public override void SetCoreOnLists( NewgroundsIO.Core ngio )
 		{
-			if (!(this._resultList is null)) this._resultList.ForEach(child => { if (!(child is null)) child.SetCore(ngio); });
+			if (!(this._resultList == null)) this._resultList.ForEach(child => { if (!(child == null)) child.SetCore(ngio); });
 		}
 
 	}

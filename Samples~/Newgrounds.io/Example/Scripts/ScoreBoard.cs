@@ -103,7 +103,7 @@ public class ScoreBoard : MonoBehaviour
         UserNamesText.text = "";
         ScoresText.text = "";
 
-        if (scores is null || scores.Count < 1) {
+        if (scores == null || scores.Count < 1) {
             RanksText.text = "No score data available.";
         } else {
             short rank = 1;
@@ -139,7 +139,7 @@ public class ScoreBoard : MonoBehaviour
     // After a score is posted, update the scoreboard again, just in case we made the top 10
     void OnScorePosted(NewgroundsIO.objects.ScoreBoard board, NewgroundsIO.objects.Score score)
     {
-        if (score is not null)
+        if (score != null)
         {
             UpdateScoreBoard();
         }

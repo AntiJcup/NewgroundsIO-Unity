@@ -20,7 +20,7 @@ namespace NewgroundsIO.components.Medal {
 		/// <param name="cloneTo">An object to clone properties to. If null, a new instance will be created.</param>
 		/// <returns>The object that was cloned to.</returns>
 		public NewgroundsIO.components.Medal.getList clone(NewgroundsIO.components.Medal.getList cloneTo = null) {
-			if (cloneTo is null) cloneTo = new NewgroundsIO.components.Medal.getList();
+			if (cloneTo == null) cloneTo = new NewgroundsIO.components.Medal.getList();
 			cloneTo.__properties.ForEach(propName => {
 				cloneTo.GetType().GetProperty(propName).SetValue(cloneTo, this.GetType().GetProperty(propName).GetValue(this), null);
 			});

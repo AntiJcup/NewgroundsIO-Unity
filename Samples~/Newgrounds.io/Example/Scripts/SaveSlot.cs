@@ -43,7 +43,7 @@ public class SaveSlot : MonoBehaviour
     public void Refresh()
     {
         var slot = NGIO.GetSaveSlot(slotNumber);
-        hasData = (slot is not null && slot.hasData);
+        hasData = (slot != null && slot.hasData);
 
         this.gameObject.transform.Find("SlotName").gameObject.GetComponent<TextMeshProUGUI>().text = "Slot "+slotNumber;
         this.gameObject.transform.Find("SlotDate").gameObject.GetComponent<TextMeshProUGUI>().text = hasData ? slot.GetDateTime().ToString() : "No Data";

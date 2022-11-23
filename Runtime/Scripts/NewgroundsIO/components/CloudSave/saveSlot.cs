@@ -22,7 +22,7 @@ namespace NewgroundsIO.components.CloudSave {
 		}
 
 		public NewgroundsIO.components.CloudSave.saveSlot clone(NewgroundsIO.components.CloudSave.saveSlot cloneTo = null) {
-			if (cloneTo is null) cloneTo = new NewgroundsIO.components.CloudSave.saveSlot();
+			if (cloneTo == null) cloneTo = new NewgroundsIO.components.CloudSave.saveSlot();
 			cloneTo.__properties.ForEach(propName => {
 				cloneTo.GetType().GetProperty(propName).SetValue(cloneTo, this.GetType().GetProperty(propName).GetValue(this), null);
 			});
