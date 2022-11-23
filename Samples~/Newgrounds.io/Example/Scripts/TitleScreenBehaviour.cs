@@ -59,10 +59,9 @@ public class TitleScreenBehaviour : MonoBehaviour
     public void OnNewgroundsIOReady(BaseEventData e)
     {
         ShowMainMenu();
-
-        foreach(var (id, slot) in SaveSlots)
+        foreach(var item in SaveSlots)
         {
-            slot.Refresh();
+            item.Value.Refresh();
         }
     }
 
